@@ -123,10 +123,11 @@ app.post("/api/students/fetch", async (req, res) => {
       });
     }
 
-    // Find all students with matching roll numbers
-    const students = await Student.find({
-      rollno: { $in: rollNumbers },
-    });
+
+    const students = await Student.find(
+      { rollno: { $in: rollNumbers } },
+      "batch cgpa active_backlogs backlogs_history" // Selecting only required fields
+    );
 
     // Check if any students were found
     if (students.length === 0) {
@@ -146,12 +147,12 @@ app.post("/api/students/fetch", async (req, res) => {
       success: true,
       data: {
         students,
-        summary: {
-          totalRequested: rollNumbers.length,
-          found: students.length,
-          notFound: notFoundRollNumbers.length,
-          notFoundRollNumbers,
-        },
+        // summary: {
+        //   totalRequested: rollNumbers.length,
+        //   found: students.length,
+        //   notFound: notFoundRollNumbers.length,
+        //   notFoundRollNumbers,
+        // },
       },
     });
   } catch (error) {
