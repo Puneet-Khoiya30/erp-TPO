@@ -16,10 +16,11 @@ app.use(express.json());
 // });
 
 mongoose
-  .connect("mongodb://localhost:27017/studentDB")
+  .connect("mongodb+srv://puneetkhoiyabnl8:p92SCJ8Voa2RDq1l@cluster0.zjjkt.mongodb.net/studentDB?retryWrites=true&w=majority")
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+  
 // Student Schema
 const studentSchema = new mongoose.Schema({
   name: {
